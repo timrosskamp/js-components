@@ -1,5 +1,6 @@
 import { Component, InitializerArgs } from './Component'
 import { parsePropertyDescriptor } from './descriptors/property'
+import { parseLoopDescriptor } from './descriptors/loop'
 import { parseActionDescriptor } from './descriptors/action'
 import { getOrSet } from './utils'
 
@@ -47,6 +48,20 @@ export class Application {
     
                 component.setup(initialize)
             })
+        })
+
+        root.querySelectorAll(`[${this.prefix}-for]`).forEach(element => {
+            const descriptor = parseLoopDescriptor(element.getAttribute(`${this.prefix}-for`) as string)
+    
+            if( descriptor ){
+                const scope = this.findClosestScope(element, descriptor.identifier)
+    
+                if( scope ){
+                    const component = this.pickComponent(scope.element, scope.identifier)
+    
+                    component.addLoop(element, descriptor)
+                }
+            }
         })
         
         root.querySelectorAll(`[${this.prefix}-on]`).forEach(element => {

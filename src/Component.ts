@@ -1,4 +1,5 @@
 import { ActionDesciptor, UnquotedString } from './descriptors/action'
+import { LoopDescriptor } from './descriptors/loop'
 import { PropertyDescriptor } from './descriptors/property'
 import { getElementDefaultEvent } from './utils'
 
@@ -47,6 +48,10 @@ export class Component {
         }else{
             this.references[descriptor.property] = [element]
         }
+    }
+
+    addLoop(element: Element, descriptor: LoopDescriptor) {
+        
     }
 
     addDispatcher(element: Element, descriptor: ActionDesciptor) {
