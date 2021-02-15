@@ -1,14 +1,14 @@
-import { Application } from '../dist/js-components.js'
+import { Application, ref, computed } from '../dist/js-components.js'
 
 const app = new Application
 
-app.define('hello', ({ ref }) => {
-    function onInput(event) {
-        ref('text').textContent = `Hello, ${event.target.value}!`
-    }
+app.define('hello', () => {
+    const name = ref('')
+    const greeting = computed(() => `Hello, ${name.value}!`)
 
     return {
-        onInput
+        name,
+        greeting
     }
 })
 

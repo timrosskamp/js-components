@@ -1,5 +1,6 @@
 import { Component, InitializerArgs } from './Component'
 import { parsePropertyDescriptor } from './descriptors/property'
+import { parseAssignmentDescriptor } from './descriptors/assignment'
 import { parseActionDescriptor } from './descriptors/action'
 import { getOrSet } from './utils'
 
@@ -46,6 +47,34 @@ export class Application {
                 const component = this.pickComponent(scope, identifier)
     
                 component.setup(initialize)
+            })
+        })
+
+        root.querySelectorAll(`[${this.prefix}-bind]`).forEach(element => {
+            const descriptors = parseAssignmentDescriptor(element.getAttribute(`${this.prefix}-bind`) as string)
+    
+            descriptors.forEach(descriptor => {
+                const scope = this.findClosestScope(element, descriptor.identifier)
+    
+                if( scope ){
+                    const component = this.pickComponent(scope.element, scope.identifier)
+    
+                    component.addBinding(element, descriptor)
+                }
+            })
+        })
+    
+        root.querySelectorAll(`[${this.prefix}-model]`).forEach(element => {
+            const descriptors = parsePropertyDescriptor(element.getAttribute(`${this.prefix}-model`) as string)
+    
+            descriptors.forEach(descriptor => {
+                const scope = this.findClosestScope(element, descriptor.identifier)
+    
+                if( scope ){
+                    const component = this.pickComponent(scope.element, scope.identifier)
+    
+                    component.addModel(element, descriptor)
+                }
             })
         })
         

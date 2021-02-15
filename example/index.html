@@ -12,8 +12,8 @@
 
         <h2>Simple Hello Component</h2>
         <div x-component="hello">
-            <input x-on="input->onInput($event)" type="text" placeholder="Your Name">
-            <span x-ref="text"></span>
+            <input x-model="name" type="text" placeholder="Your Name">
+            <span x-bind="text:greeting"></span>
         </div>
 
         <h2>Dropdown/Modal</h2>
