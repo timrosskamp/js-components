@@ -1,6 +1,8 @@
-import { define, run } from '../dist/js-components.js'
+import { Application } from '../dist/js-components.js'
 
-define('hello', ({ ref }) => {
+const app = new Application
+
+app.define('hello', ({ ref }) => {
     function onInput(event) {
         ref('text').textContent = `Hello, ${event.target.value}!`
     }
@@ -10,7 +12,7 @@ define('hello', ({ ref }) => {
     }
 })
 
-define('collapsible', ({ ref }) => {
+app.define('collapsible', ({ ref }) => {
     function toggle() {
         ref('content').hidden = !ref('content').hidden
     }
@@ -20,7 +22,7 @@ define('collapsible', ({ ref }) => {
     }
 })
 
-define('tabs', ({ refs }) => {
+app.define('tabs', ({ refs }) => {
     function selectTab(index) {
         refs('tab').forEach(tab => tab.hidden = true)
         refs('tab')[index].hidden = false
@@ -32,5 +34,5 @@ define('tabs', ({ refs }) => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    run()
+    app.run()
 })
