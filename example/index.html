@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>js-components</title>
+        <link rel="stylesheet" href="./style.css">
+        <script type="module" src="./main.js"></script>
+    </head>
+    <body>
+        <h1>js-components</h1>
+
+        <h2>Simple Hello Component</h2>
+        <div x-component="hello">
+            <input x-on="input->onInput($event)" type="text" placeholder="Your Name">
+            <span x-ref="text"></span>
+        </div>
+
+        <h2>Dropdown/Modal</h2>
+        <div x-component="collapsible">
+            <button x-on="toggle()">Toggle</button>
+            <div x-ref="content" hidden>
+                <p>Lorem Ipsum</p>
+            </div>
+        </div>
+
+        <h2>Tabs</h2>
+        <div x-component="tabs">
+            <button x-on="selectTab(0)">First</button>
+            <button x-on="selectTab(1)">Second</button>
+
+            <div x-ref="tab">
+                The First Tab Content
+            </div>
+            <div x-ref="tab" hidden>
+                The Second Tab Content
+            </div>
+        </div>
+    </body>
+</html>
