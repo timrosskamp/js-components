@@ -1,6 +1,6 @@
 {
   "name": "@timrosskamp/js-components",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": "Tim Roßkamp",
   "license": "MIT",
   "main": "dist/js-components.js",
